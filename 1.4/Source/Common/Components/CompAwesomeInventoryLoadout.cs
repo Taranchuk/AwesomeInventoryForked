@@ -529,16 +529,21 @@ namespace AwesomeInventory.Loadout
 
             void StartUndressJobs(IEnumerable<Apparel> apparels, Pawn pawn)
             {
+                if (apparels is null || pawn?.jobs is null)
+                    return;
                 if (!delay)
                     pawn.jobs.StopAll(true);
 
                 foreach (Apparel apparel in apparels)
                 {
-                    Job job = JobMaker.MakeJob(AwesomeInventory_JobDefOf.AwesomeInventory_Undress, apparel);
-                    if (pawn.CurJob == null)
-                        pawn.jobs.StartJob(job);
-                    else
-                        pawn.jobs.jobQueue.EnqueueLast(job);
+                    if (apparel != null)
+                    {
+                        Job job = JobMaker.MakeJob(AwesomeInventory_JobDefOf.AwesomeInventory_Undress, apparel);
+                        if (pawn.CurJob == null)
+                            pawn.jobs.StartJob(job);
+                        else
+                            pawn.jobs.jobQueue.EnqueueLast(job);
+                    }
                 }
             }
         }
