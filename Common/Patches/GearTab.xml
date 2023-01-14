@@ -12,7 +12,7 @@
 			<match Class="PatchOperationReplace">
 				<xpath>Defs/ThingDef[@Name="BasePawn"]/inspectorTabs/li[text()="CombatExtended.ITab_Inventory"]</xpath>
 				<value>
-					<li>AwesomeInventory.UI.AwesomeInventoryTab</li>
+					<li>AwesomeInventory.UI.CEAwesomeInventoryTab</li>
 				</value>
 			</match>
 			<nomatch Class="PatchOperationReplace">
