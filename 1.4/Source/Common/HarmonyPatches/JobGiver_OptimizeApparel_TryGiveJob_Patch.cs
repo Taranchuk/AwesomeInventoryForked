@@ -25,8 +25,7 @@ namespace AwesomeInventory.HarmonyPatches
     [StaticConstructorOnStartup]
     public static class JobGiver_OptimizeApparel_TryGiveJob_Patch
     {
-        private static MethodInfo _setNextOptimizeTick = typeof(JobGiver_OptimizeApparel).GetMethod("SetNextOptimizeTick", BindingFlags.NonPublic | BindingFlags.Instance);
-
+        private static MethodInfo _setNextOptimizeTick = AccessTools.Method(typeof(JobGiver_OptimizeApparel), "SetNextOptimizeTick");
         static JobGiver_OptimizeApparel_TryGiveJob_Patch()
         {
             MethodInfo original = AccessTools.Method(typeof(JobGiver_OptimizeApparel), "TryGiveJob");
