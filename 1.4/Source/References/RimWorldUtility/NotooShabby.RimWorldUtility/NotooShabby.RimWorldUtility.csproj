@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2B0BC420-9885-4D26-BBF2-698CB3EF670F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RimWorldUtility</RootNamespace>
+    <AssemblyName>NotooShabby.RimWorldUtility</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+	<LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArgumentEmtpyException.cs" />
+    <Compile Include="BenchmarkAttribute.cs" />
+    <Compile Include="CacheableBase.2.cs" />
+    <Compile Include="CacheableBase.cs" />
+    <Compile Include="CacheableTick.cs" />
+    <Compile Include="CacheableTime.cs" />
+    <Compile Include="CacheMaker.cs" />
+    <Compile Include="CacheTable.cs" />
+    <Compile Include="CollectionNotifier.cs" />
+    <Compile Include="ColorUtility.cs" />
+    <Compile Include="Draw.cs" />
+    <Compile Include="ExceptionReport.cs" />
+    <Compile Include="FeatureNews.cs" />
+    <Compile Include="ICollectionNotifier.cs" />
+    <Compile Include="ICollectionNotify.cs" />
+    <Compile Include="IEnumerableUtility.cs" />
+    <Compile Include="INotifier.cs" />
+    <Compile Include="IValueNotifier.cs" />
+    <Compile Include="IValueNotify.cs" />
+    <Compile Include="ListNotifier.cs" />
+    <Compile Include="Logging\Benchmark.cs" />
+    <Compile Include="Logging\BenchmarkBuilder.cs" />
+    <Compile Include="Logging\DebugLogger.cs" />
+    <Compile Include="Logging\IBenchmark.cs" />
+    <Compile Include="Logging\MessageLevel.cs" />
+    <Compile Include="Logging\TimeBenchmark.cs" />
+    <Compile Include="Models\ConcurrentCacheTable.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RectUtility.cs" />
+    <Compile Include="RegisterServiceAttribute.cs" />
+    <Compile Include="ServiceProvider.cs" />
+    <Compile Include="Strings.cs" />
+    <Compile Include="TimeBenchmarkAttribute.cs" />
+    <Compile Include="UI\ColorControlFoucs.cs" />
+    <Compile Include="UI\ColorPallet.cs" />
+    <Compile Include="UI\ColorPalletModel.cs" />
+    <Compile Include="UI\ColorPicker.cs" />
+    <Compile Include="UI\ColorPickerModel.cs" />
+    <Compile Include="UI\ColorSlider.cs" />
+    <Compile Include="UI\ColorSliderModel.cs" />
+    <Compile Include="UI\Dialog_ErrorReporting.cs" />
+    <Compile Include="UI\Dialog_Feature.cs" />
+    <Compile Include="UI\DrawDirection.cs" />
+    <Compile Include="UI\HexColorRect.cs" />
+    <Compile Include="UI\LabelValueRect.cs" />
+    <Compile Include="UI\LayeredSquare.cs" />
+    <Compile Include="UI\ListRect.cs" />
+    <Compile Include="UI\NumberFieldRect.cs" />
+    <Compile Include="UI\PrimaryColor.cs" />
+    <Compile Include="UI\RectBase.cs" />
+    <Compile Include="UI\RectCollection.cs" />
+    <Compile Include="UI\RGBTextRect.cs" />
+    <Compile Include="UI\TexButton.cs" />
+    <Compile Include="UI\TextRect.cs" />
+    <Compile Include="UI\TextSearchRect.cs" />
+    <Compile Include="UI\TextureRect.cs" />
+    <Compile Include="UI\TitleRect.cs" />
+    <Compile Include="UI\UrlObject.cs" />
+    <Compile Include="UI\UrlText.cs" />
+    <Compile Include="ValidateArg.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref">
+      <Version>1.4.3521-beta</Version>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony">
+      <Version>2.2.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
