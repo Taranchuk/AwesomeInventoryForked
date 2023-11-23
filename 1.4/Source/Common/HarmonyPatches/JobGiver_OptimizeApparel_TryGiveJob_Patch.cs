@@ -52,12 +52,21 @@ namespace AwesomeInventory.HarmonyPatches
 
             Job job = __result;
             Thing targetThingA = job.targetA.Thing;
+
+            if (targetThingA == null)
+            {
+                __result = null;
+                JobMaker.ReturnToPool(job);
+                _setNextOptimizeTick.Invoke(__instance, new[] { pawn });
+                return;
+            }
+
             switch (comp.Loadout)
             {
                 case AwesomeInventoryCostume costume when __result.def != JobDefOf.Wear:
                     return;
 
-                case AwesomeInventoryCostume costume when targetThingA == null || costume.CostumeItems.Any(s => s.Allows(targetThingA, out _)) || costume.CostumeItems.All(s => ApparelUtility.CanWearTogether(targetThingA.def, s.AllowedThing, BodyDefOf.Human)):
+                case AwesomeInventoryCostume costume when costume.CostumeItems.Any(s => s.Allows(targetThingA, out _)) || costume.CostumeItems.All(s => ApparelUtility.CanWearTogether(targetThingA.def, s.AllowedThing, BodyDefOf.Human)):
                     return;
 
                 case AwesomeInventoryCostume costume:
@@ -67,48 +76,48 @@ namespace AwesomeInventory.HarmonyPatches
                     return;
 
                 case AwesomeInventoryLoadout loadout:
-                {
-                    var source = new CancellationTokenSource();
-                    var token  = source.Token;
-                    try
                     {
-                        var conflict = false;
-
-                        if (!loadout.Any(selector => selector.Allows(targetThingA, out _)))
+                        var source = new CancellationTokenSource();
+                        var token = source.Token;
+                        try
                         {
-                            Parallel.ForEach(
-                                Partitioner.Create(pawn.apparel.WornApparel)
-                                , (Apparel apparel) =>
-                                {
-                                    if (token.IsCancellationRequested || targetThingA == null || ApparelUtility.CanWearTogether(apparel.def, targetThingA.def, BodyDefOf.Human))
-                                        return;
+                            var conflict = false;
 
-                                    if (!comp.Loadout.Any(selector => selector.Allows(apparel, out _)))
-                                        return;
-                                    
-                                    conflict = true;
-                                    source.Cancel();
-                                });
+                            if (!loadout.Any(selector => selector.Allows(targetThingA, out _)))
+                            {
+                                Parallel.ForEach(
+                                    Partitioner.Create(pawn.apparel.WornApparel)
+                                    , (Apparel apparel) =>
+                                    {
+                                        if (token.IsCancellationRequested || ApparelUtility.CanWearTogether(apparel.def, targetThingA.def, BodyDefOf.Human))
+                                            return;
+
+                                        if (!comp.Loadout.Any(selector => selector.Allows(apparel, out _)))
+                                            return;
+
+                                        conflict = true;
+                                        source.Cancel();
+                                    });
+                            }
+
+                            if (!conflict)
+                                return;
+
+                            __result = new DressJob(AwesomeInventory_JobDefOf.AwesomeInventory_Dress, targetThingA, false);
+                            JobMaker.ReturnToPool(job);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.ErrorOnce(e.Message, 129555056);
+                            __result = JobMaker.MakeJob(JobDefOf.Wear, targetThingA);
+                        }
+                        finally
+                        {
+                            source.Dispose();
                         }
 
-                        if (!conflict)
-                            return;
-                    
-                        __result = new DressJob(AwesomeInventory_JobDefOf.AwesomeInventory_Dress, targetThingA, false);
-                        JobMaker.ReturnToPool(job);
+                        break;
                     }
-                    catch (Exception e)
-                    {
-                        Log.ErrorOnce(e.Message, 129555056);
-                        __result = JobMaker.MakeJob(JobDefOf.Wear, targetThingA);
-                    }
-                    finally
-                    {
-                        source.Dispose();
-                    }
-
-                    break;
-                }
             }
         }
     }
