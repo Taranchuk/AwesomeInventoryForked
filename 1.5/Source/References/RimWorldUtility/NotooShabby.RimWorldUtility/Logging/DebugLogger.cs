@@ -19,22 +19,22 @@ namespace RimWorldUtility.Logging
 			switch (level)
 			{
 			case MessageLevel.Message:
-				Log.Message(message, true);
+				Log.Message(message);
 				return;
 			case MessageLevel.Warning:
-				Log.Warning(message, true);
+				Log.Warning(message);
 				return;
 			case MessageLevel.Error:
-				Log.Error(message, true);
+				Log.Error(message);
 				return;
 			case MessageLevel.Trace:
-				Log.Message(message, true);
+				Log.Message(message);
 				return;
 			case MessageLevel.Detail:
-				Log.Message(message, true);
+				Log.Message(message);
 				return;
 			default:
-				Log.Message(message, true);
+				Log.Message(message);
 				return;
 			}
 		}
