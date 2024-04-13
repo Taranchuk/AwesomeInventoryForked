@@ -83,9 +83,6 @@ namespace RimWorldUtility.UI
 		// Token: 0x04000081 RID: 129
 		public static readonly Texture2D ToggleGodMode = ContentFinder<Texture2D>.Get("UI/Buttons/DevRoot/ToggleGodMode", true);
 
-		// Token: 0x04000082 RID: 130
-		public static readonly Texture2D TogglePauseOnError = ContentFinder<Texture2D>.Get("UI/Buttons/DevRoot/TogglePauseOnError", true);
-
 		// Token: 0x04000083 RID: 131
 		public static readonly Texture2D ToggleTweak = ContentFinder<Texture2D>.Get("UI/Buttons/DevRoot/ToggleTweak", true);
 
@@ -124,9 +121,6 @@ namespace RimWorldUtility.UI
 
 		// Token: 0x0400008F RID: 143
 		public static readonly Texture2D RangeMatch = ContentFinder<Texture2D>.Get("UI/Buttons/Dev/RangeMatch", true);
-
-		// Token: 0x04000090 RID: 144
-		public static readonly Texture2D InspectModeToggle = ContentFinder<Texture2D>.Get("UI/Buttons/Dev/InspectModeToggle", true);
 
 		// Token: 0x04000091 RID: 145
 		public static readonly Texture2D CenterOnPointsTex = ContentFinder<Texture2D>.Get("UI/Buttons/Dev/CenterOnPoints", true);

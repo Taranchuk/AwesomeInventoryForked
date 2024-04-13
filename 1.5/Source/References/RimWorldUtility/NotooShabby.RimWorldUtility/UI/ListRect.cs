@@ -29,7 +29,7 @@ namespace RimWorldUtility.UI
 			IList<TItem> list = model.GetList<TItem>();
 			if (list.Count != this._modelCount)
 			{
-				Log.Error(string.Format("Count of model - {0} in draw is different from what used in build - {1}.", list.Count, this._modelCount), false);
+				Log.Error(string.Format("Count of model - {0} in draw is different from what used in build - {1}.", list.Count, this._modelCount));
 				return Rect.zero;
 			}
 			for (int i = 0; i < list.Count; i++)
@@ -50,7 +50,7 @@ namespace RimWorldUtility.UI
 			IList<TItem> list = model.GetList<TItem>();
 			if (list.Count != this._modelCount)
 			{
-				Log.Error(string.Format("Count of model - {0} in draw is different from what used in build - {1}.", list.Count, this._modelCount), false);
+				Log.Error(string.Format("Count of model - {0} in draw is different from what used in build - {1}.", list.Count, this._modelCount));
 				return Rect.zero;
 			}
 			Vector2 vector = position + this.Offset;
