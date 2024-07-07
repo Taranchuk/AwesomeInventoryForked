@@ -237,7 +237,11 @@ namespace AwesomeInventory.Loadout
                 _thingGroupSelectors.Add(item);
                 if (!(item.AllowedThing is AIGenericDef))
                 {
-                    this.filter.SetAllow(item.AllowedThing, true);
+                    try
+                    {
+                        this.filter.SetAllow(item.AllowedThing, true);
+                    }
+                    catch { }
                 }
 
                 this.NotifySiblingsSelectorAdded(item);
