@@ -11,6 +11,7 @@ using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace AwesomeInventory.HarmonyPatches
 {
@@ -62,6 +63,36 @@ namespace AwesomeInventory.HarmonyPatches
             if (pawn.UseLoadout(out _))
             {
                 __result = 0;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
+
+    [StaticConstructorOnStartup]
+    public static class JobGiver_UpdateLoadout_Patch
+    {
+        static JobGiver_UpdateLoadout_Patch()
+        {
+            MethodInfo original = typeof(JobGiver_UpdateLoadout).GetMethod("TryGiveJob", AccessTools.all);
+            MethodInfo prefix = typeof(JobGiver_UpdateLoadout_Patch).GetMethod("Prefix", AccessTools.all);
+            Utility.Harmony.Patch(original, prefix: new HarmonyMethod(prefix));
+        }
+
+        /// <summary>
+        /// If a pawn has a loadout, return null job.
+        /// </summary>
+        /// <param name="pawn"> Selected pawn. </param>
+        /// <param name="__result"> Result returned by the original method. </param>
+        /// <returns> If true, continue to execute. </returns>
+        public static bool Prefix(Pawn pawn, ref Job __result)
+        {
+            if (pawn.UseLoadout(out _))
+            {
+                __result = null;
                 return false;
             }
             else
